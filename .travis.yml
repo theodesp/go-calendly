@@ -1,0 +1,27 @@
+language: go
+
+os:
+  - linux
+
+before_install:
+  - make debs
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+go:
+  - 1.8
+  - 1.9.2
+  - 1.10.3
+  - tip
+
+matrix:
+  allow_failures:
+    - go: tip
+
+script:
+  - go test -cpu=2 -race -v $(go list ./... | grep -Ev "example|vendor")
+  - go test -cpu=2 -coverprofile=coverage.txt -covermode=atomic $(go list ./... | grep -Ev "example|vendor")
+
+notifications:
+  email: false
