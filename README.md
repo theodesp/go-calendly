@@ -1,6 +1,6 @@
 # go-calendly - WIP #
 
-<a href="https://godoc.org/github.com/theodesp/go-calendly">
+<a href="https://godoc.org/github.com/theodesp/go-calendly/calendly">
 <img src="https://godoc.org/github.com/theodesp/go-calendly/calendly?status.svg" alt="GoDoc">
 </a>
 
