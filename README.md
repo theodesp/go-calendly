@@ -72,7 +72,7 @@ you. If you have an API access token (for example, a [integrations](https://cale
 
 ### API docs ###
 
-For complete usage of go-calendly, see the full [package docs][https://godoc.org/github.com/theodesp/go-calendly/calendly].
+For complete usage of go-calendly, see the full [package docs](https://godoc.org/github.com/theodesp/go-calendly/calendly])
 
 [Calendly API]: https://developer.calendly.com/docs/getting-started
 
