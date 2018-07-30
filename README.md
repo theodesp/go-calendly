@@ -4,8 +4,8 @@
 <img src="https://godoc.org/github.com/theodesp/go-calendly/calendly?status.svg" alt="GoDoc">
 </a>
 
-<a href="https://opensource.org/licenses/BSD-3-Clause" rel="nofollow">
-<img src="https://img.shields.io/badge/License-BSD%203--Clause-blue.svg" alt="License"/>
+<a href="https://opensource.org/licenses/Apache-2.0">
+img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"/>
 </a>
 
 <a href="https://travis-ci.org/theodesp/go-calendly" rel="nofollow">
@@ -22,10 +22,6 @@
 
 <a href="https://goreportcard.com/report/github.com/theodesp/go-calendly">
   <img src="https://goreportcard.com/badge/github.com/theodesp/go-calendly" />
-</a>
-
-<a href="https://waffle.io/theodesp/go-calendly">
-  <img src="https://badge.waffle.io/theodesp/go-calendly.svg?columns=all" />
 </a>
 
 go-calendly is a Go client library for accessing the [Calendly API v1](https://developer.calendly.com/docs/getting-started).
