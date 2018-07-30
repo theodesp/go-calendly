@@ -5,7 +5,7 @@
 </a>
 
 <a href="https://opensource.org/licenses/Apache-2.0">
-img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"/>
+<img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"/>
 </a>
 
 <a href="https://travis-ci.org/theodesp/go-calendly" rel="nofollow">
