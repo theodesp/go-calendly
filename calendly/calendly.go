@@ -227,7 +227,7 @@ func (r *Echo) String() string {
 	return fmt.Sprintf("EchoResponse: email=%v", r.Email)
 }
 
-func addOptions(s string, opt interface{}) (string, error) {
+func addUrlOptions(s string, opt interface{}) (string, error) {
 	v := reflect.ValueOf(opt)
 
 	if v.Kind() == reflect.Ptr && v.IsNil() {

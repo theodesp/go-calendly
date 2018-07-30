@@ -42,13 +42,21 @@ Construct a new Calendly client, then use the various services on the client to
 access different parts of the Calendly API. For example:
 
 ```go
+client := calendly.NewClient(nil)
+
+// list all event types for current user
+eventTypes, _, err := client.EventTypes.List(context.Background(), nil)
 
 ```
 
 Some API methods have optional parameters that can be passed. For example:
 
 ```go
+client := calendly.NewClient(nil)
 
+// list all event types for current user including the owner data
+opt := &calendly.EventTypesOpts{Include: calendly.IncludeTypesOwner}
+eventTypes, _, err := client.EventTypes.List(context.Background(), opt)
 ```
 
 NOTE: Using the [context](https://godoc.org/context) package, one can easily
@@ -66,7 +74,15 @@ creating a new client, pass an `http.Client` that can handle authentication for
 you. If you have an API access token (for example, a [integrations](https://calendly.com/integrations)), you can use it with the library using:
 
 ```go
-
+func main() {
+	ctx := context.Background()
+	// NewTokenAuthClient adds X-Token auth header
+	authClient := calendly.NewTokenAuthClient(&calendly.Config{ApiKey: apiKey})
+	client := calendly.NewClient(authClient)
+	resp, _, _ := client.Echo(ctx)
+    
+	fmt.Println(resp)
+}
 ```
 
 
