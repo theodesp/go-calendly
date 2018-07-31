@@ -73,6 +73,16 @@ func (suite *CalendlyClientTestSuite) TestNewRequest_invalidJSON() {
 	assert.IsType(&json.UnsupportedTypeError{}, err)
 }
 
+func (suite *CalendlyClientTestSuite) TestNewRequest_invalidParams() {
+	assert := assert.New(suite.T())
+
+	_, err := suite.client.NewRequest("GET", "http://192.168.0.%31/", nil)
+	assert.NotNil(err)
+
+	_, err = suite.client.NewRequest("bad method", "/", nil)
+	assert.NotNil(err)
+}
+
 func (suite *CalendlyClientTestSuite) TestDo() {
 	assert := assert.New(suite.T())
 	type foo struct {
@@ -113,6 +123,14 @@ func (suite *CalendlyClientTestSuite) TestClient_SetBaseUrl() {
 
 	assert.Nil(err)
 	assert.Equal(suite.client.BaseURL, expectedBaseUrl)
+}
+
+func (suite *CalendlyClientTestSuite) TestClient_SetInvalidBaseUrl() {
+	assert := assert.New(suite.T())
+
+	err := suite.client.SetBaseURL("http://192.168.0.%31/")
+
+	assert.NotNil(err)
 }
 
 func (suite *CalendlyClientTestSuite) TestClient_SetUserAgent() {

@@ -55,7 +55,7 @@ Some API methods have optional parameters that can be passed. For example:
 client := calendly.NewClient(nil)
 
 // list all event types for current user including the owner data
-opt := &calendly.EventTypesOpts{Include: calendly.IncludeTypesOwner}
+opt := &calendly.EventTypesOpts{Include: calendly.IncludeTypeOwner}
 eventTypes, _, err := client.EventTypes.List(context.Background(), opt)
 ```
 
@@ -120,5 +120,5 @@ documentation for details on preview functionality.
 
 ## License ##
 
-This library is distributed under the BSD-style license found in the [LICENSE](./LICENSE)
+This library is distributed under the Apache license found in the [LICENSE](./LICENSE)
 file.

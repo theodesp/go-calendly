@@ -27,11 +27,16 @@ type Client struct {
 	// HTTP client used to communicate with the DO API.
 	client *http.Client
 
+	common ApiService
+
 	// Base URL for API requests.
 	BaseURL *url.URL
 
 	// User agent for client
 	UserAgent string
+
+	// Event Types Service
+	EventTypes EventTypesService
 }
 
 // Response is a Calendly response. This wraps the standard http.Response returned
@@ -52,6 +57,10 @@ type ErrorResponse struct {
 	RequestID string `json:"request_id"`
 }
 
+type ApiService struct {
+	client *Client
+}
+
 // NewClient returns a new DigitalOcean API client.
 func NewClient(httpClient *http.Client) *Client {
 	if httpClient == nil {
@@ -60,6 +69,8 @@ func NewClient(httpClient *http.Client) *Client {
 
 	baseURL, _ := url.Parse(defaultBaseURL)
 	c := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
+	c.common.client = c
+	c.EventTypes = EventTypesService{c}
 
 	return c
 }

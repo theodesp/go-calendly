@@ -15,7 +15,11 @@ func main() {
 	ctx := context.Background()
 	authClient := calendly.NewTokenAuthClient(&calendly.Config{ApiKey: apiKey})
 	client := calendly.NewClient(authClient)
-	resp, _, _ := client.Echo(ctx)
+	resp, _, _ := client.EventTypes.List(ctx,
+		&calendly.EventTypesOpts{Include: calendly.IncludeTypeOwner})
 
-	fmt.Println(resp)
+	for _, et := range resp {
+		fmt.Println(et)
+	}
+
 }
