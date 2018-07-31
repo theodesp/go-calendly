@@ -10,23 +10,34 @@ import (
 
 const (
 	webhooksPath = "hooks"
-	InviteeCreatedHookType EventHookType  = "invitee.created"
-	InviteeCancelledHookType EventHookType  = "invitee.cancelled"
+	getWebhookpath = "hooks/%v"
 )
 
 type WebhooksService apiService
 
 type Webhook struct {
-	ID string `json:"id"`
+	Type       string     `json:"type"`
+	ID         int64      `json:"id"`
+	Attributes *WebhookAttributes `json:"attributes,omitempty"`
+}
+
+type WebhookAttributes struct {
+	URL       string  `json:"url"`
+	CreatedAt string  `json:"created_at"`
+	State     string  `json:"state"`
+	Events    []EventHookType `json:"events"`
 }
 
 type EventHookType string
+const (
+	InviteeCreatedHookType EventHookType  = "invitee.created"
+	InviteeCancelledHookType EventHookType  = "invitee.cancelled"
+)
 
 type WebhooksOpts struct {
 	Url string
 	Events []EventHookType
 }
-
 
 // Calendly supports webhooks which allow you to receive Calendly
 // appointment data in real-time at a specified URL when a Calendly event is scheduled or cancelled.
@@ -65,4 +76,24 @@ func (s *WebhooksService)Create(ctx context.Context, opt *WebhooksOpts) (*Webhoo
 	}
 
 	return wh, resp, nil
+}
+
+// Any of your Webhook Subscriptions can be accessed by ID using this endpoint.
+func (s *WebhooksService)GetByID(ctx context.Context, id int64) (*Webhook, *Response, error)  {
+	req, err := s.client.Get(fmt.Sprintf(getWebhookpath, id))
+	if err != nil {
+		return nil, nil, err
+	}
+
+	wh := &webhookResponse{}
+	resp, err := s.client.Do(ctx, req, wh)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wh.Webhook, resp, nil
+}
+
+type webhookResponse struct {
+	Webhook *Webhook `json:"data"`
 }

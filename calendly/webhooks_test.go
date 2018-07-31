@@ -21,18 +21,37 @@ func (suite *CalendlyClientTestSuite) TestWebhooksService_Create() {
 		assert.Equal(expected, url.QueryEscape(string(body)))
 
 		w.WriteHeader(http.StatusCreated)
-		fmt.Fprint(w, `{"id":"123"}`)
+		fmt.Fprint(w, `{"id":123}`)
 	})
 	opts := &WebhooksOpts{
 		Url: "http://webhook",
 		Events: []EventHookType{InviteeCancelledHookType},
 	}
 	v, resp, err := suite.client.Webhooks.Create(context.Background(), opts)
-	want := &Webhook{ID: "123"}
+	want := &Webhook{ID: int64(123)}
 
 	assert.Nil(err)
 	assert.Equal(want, v)
 	assert.Equal(http.StatusCreated, resp.StatusCode)
+}
+
+
+func (suite *CalendlyClientTestSuite) TestWebhooksService_GetByID() {
+	assert := assert.New(suite.T())
+	route := fmt.Sprintf("/%s", fmt.Sprintf(getWebhookpath, "1"))
+
+	suite.mux.HandleFunc(route, func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(r.Method, http.MethodGet)
+		fmt.Fprint(w, `{"data":{"id":123}}`)
+	})
+
+	webHook, _, err := suite.client.Webhooks.GetByID(context.Background(), int64(1))
+	assert.Nil(err)
+
+	want := &Webhook{
+		ID: int64(123),
+	}
+	assert.Equal(want, webHook)
 }
 
 func (suite *CalendlyClientTestSuite) TestWebhooksService_InvalidParams() {
