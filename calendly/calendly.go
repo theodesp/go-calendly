@@ -27,7 +27,7 @@ type Client struct {
 	// HTTP client used to communicate with the DO API.
 	client *http.Client
 
-	common ApiService
+	common apiService
 
 	// Base URL for API requests.
 	BaseURL *url.URL
@@ -37,6 +37,9 @@ type Client struct {
 
 	// Event Types Service
 	EventTypes EventTypesService
+
+	// Users Service
+	Users UsersService
 }
 
 // Response is a Calendly response. This wraps the standard http.Response returned
@@ -57,7 +60,7 @@ type ErrorResponse struct {
 	RequestID string `json:"request_id"`
 }
 
-type ApiService struct {
+type apiService struct {
 	client *Client
 }
 
@@ -71,6 +74,7 @@ func NewClient(httpClient *http.Client) *Client {
 	c := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
 	c.common.client = c
 	c.EventTypes = EventTypesService{c}
+	c.Users = UsersService{c}
 
 	return c
 }

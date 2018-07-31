@@ -13,7 +13,7 @@ const (
 	IncludeTypeOwner IncludeType = "owner"
 )
 
-type EventTypesService ApiService
+type EventTypesService apiService
 
 // Include Event type option
 type IncludeType string
@@ -26,13 +26,13 @@ type EventTypesOpts struct {
 }
 
 type eventTypesResponse struct {
-	Data []*EventType `json:"data"`
+	Data []*EventType `json:"data,omitempty"`
 }
 
 type EventType struct {
 	Type string `json:"type"`
 	Id string `json:"id"`
-	Attributes *EventTypeAttributes `json:"attributes"`
+	Attributes *EventTypeAttributes `json:"attributes,omitempty"`
 	Relationships *Relationships `json:"relationships,omitempty"`
 }
 
