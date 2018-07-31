@@ -3,7 +3,7 @@ package calendly
 import (
 	"context"
 	"fmt"
-	"strings"
+	"bytes"
 )
 
 const (
@@ -62,7 +62,7 @@ type EventTypeAttributes struct {
 }
 
 func (et *EventType) String() string  {
-	b := strings.Builder{}
+	b := bytes.NewBufferString("")
 	b.WriteString(fmt.Sprintf("EventType: id:%v attributes: ", et.Id))
 	b.WriteString(fmt.Sprintf("Name:%v ", et.Attributes.Name))
 	b.WriteString(fmt.Sprintf("Description:%v ", et.Attributes.Description))
