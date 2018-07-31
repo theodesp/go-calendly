@@ -40,7 +40,7 @@ type Transport struct {
 // RoundTrip authorizes the request by passing the API token to the request header
 func (t *Transport) RoundTrip(req *http.Request) (*http.Response, error) {
 	if t.config == nil {
-		return nil, fmt.Errorf("go-calendly: Transport's source is nil")
+		return nil, fmt.Errorf("go-calendly: Transport's config is nil")
 	}
 
 	if t.config.HeaderKey == "" {

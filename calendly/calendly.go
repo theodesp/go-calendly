@@ -20,6 +20,7 @@ const (
 	defaultBaseURL = "https://calendly.com/api/v1/"
 	userAgent      = "go-calendly-" + libraryVersion
 	mediaType      = "application/json"
+	textType      = "text/html"
 	testRoute      = "echo"
 )
 
@@ -40,6 +41,9 @@ type Client struct {
 
 	// Users Service
 	Users UsersService
+
+	// Webhooks Service
+	Webhooks WebhooksService
 }
 
 // Response is a Calendly response. This wraps the standard http.Response returned
@@ -64,7 +68,7 @@ type apiService struct {
 	client *Client
 }
 
-// NewClient returns a new DigitalOcean API client.
+// NewClient returns a new Calendly API client.
 func NewClient(httpClient *http.Client) *Client {
 	if httpClient == nil {
 		httpClient = http.DefaultClient
@@ -75,6 +79,7 @@ func NewClient(httpClient *http.Client) *Client {
 	c.common.client = c
 	c.EventTypes = EventTypesService{c}
 	c.Users = UsersService{c}
+	c.Webhooks = WebhooksService{c}
 
 	return c
 }
