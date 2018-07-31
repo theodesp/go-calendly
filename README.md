@@ -94,7 +94,7 @@ For complete usage of go-calendly, see the full [package docs](https://godoc.org
 
 **API Coverage**
 - [x] Event Types
-- [ ] User info
+- [x] User info
 - [ ] Webhooks
 
 ## Roadmap ##
