@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	libraryVersion = "0.1.0"
+	libraryVersion = "1.0.0"
 	defaultBaseURL = "https://calendly.com/api/v1/"
 	userAgent      = "go-calendly-" + libraryVersion
 	mediaType      = "application/json"
