@@ -113,6 +113,21 @@ func (s *WebhooksService)GetByID(ctx context.Context, id int64) (*Webhook, *Resp
 	return wh.Webhook, resp, nil
 }
 
+// Any of your Webhook Subscriptions can be deleted by ID using this endpoint.
+func (s *WebhooksService)Delete(ctx context.Context, id int64) (*Response, error)  {
+	req, err := s.client.Delete(fmt.Sprintf(getWebhookpath, id))
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := s.client.Do(ctx, req, nil)
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
+}
+
 type webhookResponse struct {
 	Webhook *Webhook `json:"data"`
 }

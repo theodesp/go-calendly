@@ -73,6 +73,21 @@ func (suite *CalendlyClientTestSuite) TestEventTypesService_ListWebhooks() {
 	assert.Equal(want, webhooks)
 }
 
+func (suite *CalendlyClientTestSuite) TestEventTypesService_DeleteWebhook() {
+	assert := assert.New(suite.T())
+	route := fmt.Sprintf("/%s", fmt.Sprintf(getWebhookpath, "1"))
+
+	suite.mux.HandleFunc(route, func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(r.Method, http.MethodDelete)
+		w.WriteHeader(http.StatusOK)
+	})
+
+	resp, err := suite.client.Webhooks.Delete(context.Background(), int64(1))
+	assert.Nil(err)
+
+	assert.Equal(http.StatusOK, resp.StatusCode)
+}
+
 func (suite *CalendlyClientTestSuite) TestWebhooksService_InvalidParams() {
 	assert := assert.New(suite.T())
 
