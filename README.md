@@ -1,4 +1,4 @@
-# go-calendly - WIP #
+# go-calendly
 
 <a href="https://godoc.org/github.com/theodesp/go-calendly/calendly">
 <img src="https://godoc.org/github.com/theodesp/go-calendly/calendly?status.svg" alt="GoDoc">
@@ -27,10 +27,6 @@
 go-calendly is a Go client library for accessing the [Calendly API v1](https://developer.calendly.com/docs/getting-started).
 
 go-calendly requires Go version 1.8 or greater.
-
-
-This is ***WIP!***
-
 
 ## Usage ##
 

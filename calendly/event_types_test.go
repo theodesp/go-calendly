@@ -20,8 +20,8 @@ func (suite *CalendlyClientTestSuite) TestEventTypesService_ListEventTypes() {
 	assert.Nil(err)
 
 	want := []*EventType{
-		{Id: "123"},
-		{Id: "456"},
+		{ID: "123"},
+		{ID: "456"},
 	}
 	assert.Equal(want, eventTypes)
 }

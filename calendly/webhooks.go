@@ -78,6 +78,25 @@ func (s *WebhooksService)Create(ctx context.Context, opt *WebhooksOpts) (*Webhoo
 	return wh, resp, nil
 }
 
+// You can view your current Webhook Subscriptions.
+//
+// Using this endpoint will list up to the first 100 Webhook Subscriptions,
+// and it will order active subscriptions first.
+func (s *WebhooksService)List(ctx context.Context) ([]*Webhook, *Response, error)  {
+	req, err := s.client.Get(webhooksPath)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	wh := &webhookListResponse{}
+	resp, err := s.client.Do(ctx, req, wh)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return wh.Webhooks, resp, nil
+}
+
 // Any of your Webhook Subscriptions can be accessed by ID using this endpoint.
 func (s *WebhooksService)GetByID(ctx context.Context, id int64) (*Webhook, *Response, error)  {
 	req, err := s.client.Get(fmt.Sprintf(getWebhookpath, id))
@@ -96,4 +115,8 @@ func (s *WebhooksService)GetByID(ctx context.Context, id int64) (*Webhook, *Resp
 
 type webhookResponse struct {
 	Webhook *Webhook `json:"data"`
+}
+
+type webhookListResponse struct {
+	Webhooks []*Webhook `json:"data"`
 }

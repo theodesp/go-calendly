@@ -31,7 +31,7 @@ type eventTypesResponse struct {
 
 type EventType struct {
 	Type string `json:"type"`
-	Id string `json:"id"`
+	ID string `json:"id"`
 	Attributes *EventTypeAttributes `json:"attributes,omitempty"`
 	Relationships *Relationships `json:"relationships,omitempty"`
 }
@@ -63,7 +63,7 @@ type EventTypeAttributes struct {
 
 func (et *EventType) String() string  {
 	b := bytes.NewBufferString("")
-	b.WriteString(fmt.Sprintf("EventType: id:%v attributes: ", et.Id))
+	b.WriteString(fmt.Sprintf("EventType: id:%v attributes: ", et.ID))
 	b.WriteString(fmt.Sprintf("Name:%v ", et.Attributes.Name))
 	b.WriteString(fmt.Sprintf("Description:%v ", et.Attributes.Description))
 	b.WriteString(fmt.Sprintf("Duration:%v ", et.Attributes.Duration))

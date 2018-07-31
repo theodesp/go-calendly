@@ -54,6 +54,25 @@ func (suite *CalendlyClientTestSuite) TestWebhooksService_GetByID() {
 	assert.Equal(want, webHook)
 }
 
+func (suite *CalendlyClientTestSuite) TestEventTypesService_ListWebhooks() {
+	assert := assert.New(suite.T())
+	route := fmt.Sprintf("/%s", webhooksPath)
+
+	suite.mux.HandleFunc(route, func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(r.Method, http.MethodGet)
+		fmt.Fprint(w, `{"data":[{"id":123},{"id":456}]}`)
+	})
+
+	webhooks, _, err := suite.client.Webhooks.List(context.Background())
+	assert.Nil(err)
+
+	want := []*Webhook{
+		{ID: int64(123)},
+		{ID: int64(456)},
+	}
+	assert.Equal(want, webhooks)
+}
+
 func (suite *CalendlyClientTestSuite) TestWebhooksService_InvalidParams() {
 	assert := assert.New(suite.T())
 
